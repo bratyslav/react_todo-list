@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
 
-function User(props) {
+function User({person}) {
   return (
     <div className="user">
-      { props.person['name'] }
+      {
+        person['name']
+      }
     </div>
   )
 }
