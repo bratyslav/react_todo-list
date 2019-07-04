@@ -1,9 +1,8 @@
 import React from 'react';
-import './App.css';
-import { users } from './users';
 import User from './User';
 import TodoItem from './TodoItem';
 import { todos } from './todos';
+import { users } from './users';
 
 function TodoList() {
   return users.map(person => (
