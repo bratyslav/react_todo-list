@@ -15,3 +15,17 @@ body {
 
   font-size: 20px;
 }
+
+.validationErrorVisible {
+  display: inline;
+}
+
+.validationErrorNotVisible {
+  display: none;
+}
+
+.validationErrorVisible,
+.validationErrorNotVisible {
+  margin-left: 10px;
+  color: red;
+}

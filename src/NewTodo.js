@@ -13,8 +13,7 @@ class NewTodo extends React.Component {
     super(props);
     const { todoList } = this.props;
 
-    const userList = todoList.map(todo => todo.user);
-    const usersSet = new Set(userList);
+    const usersSet = new Set(todoList.map(todo => todo.user));
     const optionList = [];
 
     usersSet.forEach(user => {optionList.push(<option>{user}</option>)});
@@ -30,28 +29,25 @@ class NewTodo extends React.Component {
     const { addNewTask } = this.props;
 
     // валидация: проверка на наличие введенных данных
-    if (!newTask && !newTaskAuthor) {
+    if (!newTask || !newTaskAuthor) {
       this.setState({
-        inputValidationError: true,
-        selectValidationError: true
+        inputValidationError: !newTask,
+        selectValidationError: !newTaskAuthor
       });
-    } else if (!newTaskAuthor) {
-      this.setState({ selectValidationError: true });
-    } else if (!newTask) {
-      this.setState({ inputValidationError: true });
     } else {
       addNewTask(newTask, newTaskAuthor);
       this.setState({ newTask: '' });
-    }
+    };
   };
 
   handleInputEnter = (event) => {
     const { value } = event.target;
+
     if (value.length <= 100) { // ограничение количества символов
       this.setState({
         newTask: value,
         inputValidationError: false
-       });
+      });
     };
   };
 
@@ -80,7 +76,11 @@ class NewTodo extends React.Component {
           value={newTask}
         ></input>
         <span
-          style={{ display: inputValidationError ? 'inline' : 'none' }}
+          className={
+            inputValidationError
+              ? 'validationErrorVisible'
+              : 'validationErrorNotVisible'
+          }
         >
           Please enter the task
         </span>
@@ -93,7 +93,11 @@ class NewTodo extends React.Component {
           }
         </select>
         <span
-          style={{ display: selectValidationError ? 'inline' : 'none' }}
+          className={
+            selectValidationError
+              ? 'validationErrorVisible'
+              : 'validationErrorNotVisible'
+          }
         >
           Please choose a user
         </span>
