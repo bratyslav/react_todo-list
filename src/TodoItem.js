@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TodoItem = ({ todo }) => {
   const state = (todo.completed ? '✓' : '✗');
@@ -14,6 +15,10 @@ const TodoItem = ({ todo }) => {
         <hr />
       </li>
   );
+};
+
+TodoItem.propTypes = {
+  todo: PropTypes.object.isRequired
 };
 
 export default TodoItem;

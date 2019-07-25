@@ -1,25 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class NewTodo extends React.Component {
-  state = {
-    optionList: [],
-    newTask: '',
-    newTaskAuthor: '',
-    selectValidationError: false,
-    inputValidationError: false
-  };
-
   constructor(props) {
     super(props);
-    const { todoList } = this.props;
-
-    const usersSet = new Set(todoList.map(todo => todo.user));
-    const optionList = [];
-
-    usersSet.forEach(user => {optionList.push(<option>{user}</option>)});
+    const { users } = this.props;
 
     this.state = {
-      optionList: optionList
+      optionList: users.map(user => <option key={user}>{user}</option>),
+      newTask: '',
+      newTaskAuthor: '',
+      selectValidationError: false,
+      inputValidationError: false
     };
   };
 
@@ -107,6 +99,11 @@ class NewTodo extends React.Component {
       </form>
     );
   };
+};
+
+NewTodo.propTypes = {
+  addNewTask: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired
 };
 
 export default NewTodo;

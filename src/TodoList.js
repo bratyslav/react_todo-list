@@ -5,10 +5,6 @@ import { todos } from './todos';
 import { users } from './users';
 
 class TodoList extends React.Component {
-  state = {
-    todoList: []
-  };
-
   constructor(props) {
     super(props);
 
@@ -25,7 +21,8 @@ class TodoList extends React.Component {
           userId: user.id,
           id: todoId
         };
-      })
+      }),
+      users: users.map(user => user.name)
     };
   };
 
@@ -45,14 +42,14 @@ class TodoList extends React.Component {
   };
 
   render() {
-    const { todoList } = this.state;
+    const { todoList, users } = this.state;
 
     return (
       <div>
-        <NewTodo todoList={todoList} addNewTask={this.addNewTask} />
+        <NewTodo addNewTask={this.addNewTask} users={users} />
         <ul>
           {
-            todoList.map(todo => <TodoItem todo={todo} />)
+            todoList.map(todo => <TodoItem todo={todo} key={todo.id} />)
           }
         </ul>
       </div>
